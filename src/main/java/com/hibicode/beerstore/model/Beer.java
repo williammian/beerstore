@@ -25,14 +25,14 @@ public class Beer {
 	@EqualsAndHashCode.Include
     private Long id;
 
-	@NotBlank
+	@NotBlank(message = "beers-1")
     private String name;
 
-	@NotNull
+	@NotNull(message = "beers-2")
     private BeerType type;
 
-	@NotNull
-	@DecimalMin("0")
+	@NotNull(message = "beers-3")
+	@DecimalMin(value = "0", message = "beers-4")
     private BigDecimal volume;
 
 }
