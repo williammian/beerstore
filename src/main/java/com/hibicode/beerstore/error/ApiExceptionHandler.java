@@ -17,6 +17,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.hibicode.beerstore.error.ErrorResponse.ApiError;
 
 import lombok.RequiredArgsConstructor;
@@ -43,11 +44,20 @@ public class ApiExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, apiErrors);
         return ResponseEntity.badRequest().body(errorResponse);
     }
+    
+    @ExceptionHandler(InvalidFormatException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidFormatException(InvalidFormatException exception
+            , Locale locale) {
+        final String errorCode = "generic-1";
+        final HttpStatus status = HttpStatus.BAD_REQUEST;
+        final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale, exception.getValue()));
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
 
-    private ApiError toApiError(String code, Locale locale) {
+    private ApiError toApiError(String code, Locale locale, Object... args) {
         String message;
         try {
-            message = apiErrorMessageSource.getMessage(code, null, locale);
+            message = apiErrorMessageSource.getMessage(code, args, locale);
         } catch (NoSuchMessageException e) {
             LOG.error("Could not find any message for {} code under {} locale", code, locale);
             message = NO_MESSSAGE_AVAILABLE;

@@ -2,7 +2,7 @@ package com.hibicode.beerstore.model;
 
 public enum BeerType {
 
-	LARGER,
+	LAGER,
     PILSEN,
     IPA
 }
