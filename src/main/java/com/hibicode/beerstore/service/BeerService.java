@@ -12,8 +12,11 @@ import com.hibicode.beerstore.service.exception.BeerAlreadyExistException;
 @Service
 public class BeerService {
 	
-	@Autowired
 	private Beers beers;
+	
+	public BeerService(@Autowired Beers beers) {
+		this.beers = beers;
+	}
 	
 	public Beer save(final Beer beer) {
 		Optional<Beer> beerByNameAndType = beers.findByNameAndType(beer.getName(), beer.getType());  
