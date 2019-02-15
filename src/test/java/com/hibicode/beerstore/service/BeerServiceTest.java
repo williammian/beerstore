@@ -66,5 +66,18 @@ public class BeerServiceTest {
 		assertThat(beerSaved.getName(), equalTo("Heineken"));
 		assertThat(beerSaved.getType(), equalTo(BeerType.LAGER));
 	}
+	
+	@Test
+    public void delete_of_an_existing_beer_that_already_exist() {
+        final Beer beerInDatabase = new Beer();
+        beerInDatabase.setId(1L);
+        beerInDatabase.setName("Heineken");
+        beerInDatabase.setType(BeerType.LAGER);
+        beerInDatabase.setVolume(new BigDecimal("355"));
+
+        when(beersMocked.findById(1L)).thenReturn(Optional.of(beerInDatabase));
+
+        beerService.delete(1L);
+   }
 
 }
