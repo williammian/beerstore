@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class BusinessException extends RuntimeException {
 
     private final String code;
+    private final String entity;
     private final HttpStatus status;
 
 }

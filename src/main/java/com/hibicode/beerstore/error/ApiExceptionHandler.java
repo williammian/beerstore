@@ -36,8 +36,7 @@ public class ApiExceptionHandler {
     private final MessageSource apiErrorMessageSource;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleNotValidException(MethodArgumentNotValidException exception
-            , Locale locale) {
+    public ResponseEntity<ErrorResponse> handleNotValidException(MethodArgumentNotValidException exception, Locale locale) {
         Stream<ObjectError> errors = exception.getBindingResult().getAllErrors().stream();
 
         List<ApiError> apiErrors = errors
@@ -50,8 +49,7 @@ public class ApiExceptionHandler {
     }
     
     @ExceptionHandler(InvalidFormatException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidFormatException(InvalidFormatException exception
-            , Locale locale) {
+    public ResponseEntity<ErrorResponse> handleInvalidFormatException(InvalidFormatException exception, Locale locale) {
         final String errorCode = "generic-1";
         final HttpStatus status = HttpStatus.BAD_REQUEST;
         final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale, exception.getValue()));
@@ -59,13 +57,12 @@ public class ApiExceptionHandler {
     }
     
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException exception, Locale locale) {
-        final String errorCode = exception.getCode();
-        final HttpStatus status = exception.getStatus();
-
-        final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale));
-        return ResponseEntity.badRequest().body(errorResponse);
-    }
+	public ResponseEntity<ErrorResponse> handleBusinessException(final BusinessException exception, final Locale locale) {
+    	
+		final ErrorResponse errorResponse = ErrorResponse.of(exception.getStatus(), toApiError(exception.getCode(), locale, exception.getEntity()));
+		
+		return ResponseEntity.badRequest().body(errorResponse);
+	}
     
     public ApiError toApiError(String code, Locale locale, Object... args) {
         String message;
