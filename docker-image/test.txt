@@ -1,0 +1,3 @@
+//comando para rodar imagem docker
+
+docker run -p 8080:8080 --rm --network beer-net -e APP_OPTIONS='--spring.datasource.url=jdbc:postgresql://beerdb:5432/beerstore' williammian/beerstore:0.2
