@@ -1,3 +1,12 @@
-//comando para rodar imagem docker
+//rodando o postgre no docker
+docker run -p 5432:5432 --name beerdb -e POSTGRES_USER=beerstore -e POSTGRES_PASSWORD=beerstore -e POSTGRES_DB=beerstore -d postgres:10.5-alpine
 
+//criando uma rede docker de comunicacao
+docker network create beer-net
+
+//colocando o postgre para rodar dentro da rede
+docker network connect beer-net beerdb
+
+//comando para rodar imagem do sistema com docker
 docker run -p 8080:8080 --rm --network beer-net -e APP_OPTIONS='--spring.datasource.url=jdbc:postgresql://beerdb:5432/beerstore' williammian/beerstore:0.2
+
