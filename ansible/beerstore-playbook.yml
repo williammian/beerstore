@@ -1,0 +1,15 @@
+---
+- name: Ensure Docker is installed
+  hosts: all
+  remote_user: ec2-user
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install Docker
+      yum: name=docker
+
+    - name: Ensure docker service is started and enabled
+      service:
+        name: docker
+        state: started
+        enabled: yes
