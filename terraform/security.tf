@@ -34,3 +34,37 @@ resource "aws_security_group" "allow_outbound" {
   }
 
 }
+
+resource "aws_security_group" "cluster_communication" {
+  vpc_id = "${aws_vpc.main.id}"
+  name = "wm_cluster_communication"
+
+  ingress {
+    from_port = 2377
+    to_port = 2377
+    protocol = "tcp"
+    self = true
+  }
+
+  ingress {
+    from_port = 7946
+    to_port = 7946
+    protocol = "tcp"
+    self = true
+  }
+
+  ingress {
+    from_port = 7946
+    to_port = 7946
+    protocol = "udp"
+    self = true
+  }
+
+  ingress {
+    from_port = 4789
+    to_port = 4789
+    protocol = "udp"
+    self = true
+  }
+
+}
