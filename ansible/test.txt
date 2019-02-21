@@ -1,0 +1,12 @@
+//arquivo ansible.cfg utilizado devido a bug utilizando o programa Cygdrive para rodar os comandos no Windows 7
+
+//fatal: [3.81.135.220]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: mux_client_request_session:
+//read from master failed: Connection reset by peer\r\nFailed to connect to new control master", "unreachable": true}
+
+//Correção
+//https://everythingshouldbevirtual.com/automation/ansible-using-ansible-on-windows-via-cygwin/
+
+//Criar o arquivo ansible.cfg no mesmo diretório do playbook com o seguinte conteúdo:
+
+[ssh_connection]
+ssh_args = -o ControlMaster=no
