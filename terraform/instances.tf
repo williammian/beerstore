@@ -1,5 +1,5 @@
 resource "aws_key_pair" "keypair" {
-  public_key = "${file("key/beerstore_key.pub")}"
+  public_key = "${file("key2/beerstore_key.pub")}"
 }
 
 resource "aws_instance" "instances" {

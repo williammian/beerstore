@@ -1,4 +1,5 @@
 //criar os arquivos key e adicionar nesta pasta key
+//arquivos criados no windows via puttygen e putty
 
 beerstore_key.pub
 beerstore_key.ppk

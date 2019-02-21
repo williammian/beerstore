@@ -1,0 +1,7 @@
+//criando chaves no linux
+//executar dentro da pasta terraform
+
+ssh-keygen -t rsa -b 4096 -o -a 100 -f key2/beerstore_key
+
+//acessar instancia ec2 via linux
+ssh -i key2/beerstore_key ec2-user@123.123.123.123
