@@ -1,0 +1,10 @@
+//pela linha de comando, chegar até a pasta onde estão os arquivos terraform .tf
+
+//comando para inicializar
+terraform init
+
+//comando para aplicar a infraestrutura como código
+terraform apply
+
+//comando para destruir toda a infraestrutura
+terraform destroy

@@ -6,7 +6,7 @@ resource "aws_security_group" "allow_ssh" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["191.205.121.137/32"]
+    cidr_blocks = ["${var.my_public_ip}"]
   }
 }
 

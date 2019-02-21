@@ -1,3 +1,4 @@
-adicionar nesta pasta
+//criar os arquivos key e adicionar nesta pasta key
+
 beerstore_key.pub
 beerstore_key.ppk
