@@ -1,6 +1,6 @@
 resource "aws_lb" "alb" {
   name = "wm-beerstore-alb"
-  security_groups = []
+  security_groups = ["${aws_security_group.allow_load_balancer.id}"]
   subnets = ["${flatten(chunklist(aws_subnet.public_subnet.*.id, 1))}"]
 
   enable_deletion_protection = false
