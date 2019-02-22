@@ -8,3 +8,8 @@ terraform apply
 
 //comando para destruir toda a infraestrutura
 terraform destroy
+
+//deploy da aplicacao no cluster
+//entrar via ssh em alguma instancia ec2
+
+sudo docker service create --name beerstore -e SPRING_DATASOURCE_URL=jdbc:postgresql://URL_DO_RDS_DA_SUA_CONTA:5432/beerstore -p 8080:8080 --network service <NOME_IMAGEM>:<VERSAO>
